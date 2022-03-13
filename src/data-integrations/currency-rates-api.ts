@@ -1,7 +1,15 @@
+/**
+ * Data loading logics
+ */
 import { CurrencyPair } from './types';
 import 'isomorphic-fetch';
 
 export class DataAPI {
+  /**
+   * Loading data from an API
+   * @param dataUrl
+   * @returns
+   */
   async fetchAPIData(dataUrl: string): Promise<CurrencyPair[]> {
     const data: CurrencyPair[] = [];
 
@@ -19,13 +27,17 @@ export class DataAPI {
 
     return data;
   }
-
+  /**
+   * Loading data from a file
+   * @param dataUrl
+   * @returns
+   */
   async fetchMockData(fileName: string): Promise<CurrencyPair[]> {
     const data: CurrencyPair[] = [];
 
     try {
       console.log(`\nreading mockdata from ${fileName}`);
-      
+
       const mockData = (await import(fileName)).default;
       data.push(...mockData);
 

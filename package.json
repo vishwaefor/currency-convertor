@@ -9,7 +9,8 @@
   "private": false,
   "scripts": {
     "start": "tsc && node dist/index.js",
-    "test": "tsc && node dist/__test__/index.test.js"
+    "test": "tsc && node dist/__test__/index.test.js",
+    "web": "tsc && node dist/server.js"
   },
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.36",

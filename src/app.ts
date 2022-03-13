@@ -1,25 +1,31 @@
-import { DepthFirstSearch } from './algorithms/depth-first-search';
-import { Graph } from './data-structures/graph';
-import { SimpleEdge } from './data-structures/simple-edge';
-import { SimpleNode } from './data-structures/simple-node';
+/**
+ * Main application for running to generte the exchange rates
+ */
 import { DataAPI } from './data-integrations/currency-rates-api';
+import { CurrencyPair } from './data-integrations/types';
+import { CodeValueCache } from './data-structures/code-value-cache';
 import { CurrencyConvertor } from './engine/currency-convertor';
 import { ConvertedResult, CurrencyMetadata } from './engine/types';
-import { CodeValueCache } from './data-structures/code-value-cache';
-import { findCurrencyMetadata } from './utils/currency-metadata-finder';
-import { CurrencyPair } from './data-integrations/types';
 import { writeCSVFile } from './utils/csv-writter';
+import { findCurrencyMetadata } from './utils/currency-metadata-finder';
 
 export type DataMode = 'MOCK' | 'REST';
 const OUTPUT_DIR: string = 'results';
+
 export class App {
   constructor(private dataUrl: string, private dataMode: DataMode) {}
 
+  /**
+   * Calculates the amouns of exchanged money for a given amount of money from a single source
+   * @param amount
+   * @param fromCurrency
+   */
   async run(amount: number, fromCurrency: string) {
-    console.log('\n\n## C U R R E N C Y - C O N V E R T O R ##\n\n');
+    console.log('\n\n## C U R R E N C Y - C O N V E R T E R ##\n\n');
 
-    // Fetching currency pairs from the REST API endpoint
+    // Fetching currency pairs from the REST API endpoint or File based on the mode
     const data = await this.loadData(this.dataUrl, this.dataMode);
+
     // Caching additional data for future usage
     const currencyMetaDataCache = this.initCurrencyMetadataCache(data);
 
@@ -36,6 +42,11 @@ export class App {
     console.log('\n\n## F I N I S H E D ##\n');
   }
 
+  /**
+   * Cache data for taking currency names for given code
+   * @param data
+   * @returns
+   */
   private initCurrencyMetadataCache(data: CurrencyPair[]) {
     const currencyMetaDataCache = new CodeValueCache<CurrencyMetadata>();
 
@@ -46,6 +57,12 @@ export class App {
     return currencyMetaDataCache;
   }
 
+  /**
+   * Load data from API or files
+   * @param dataUrl
+   * @param mode
+   * @returns
+   */
   private async loadData(dataUrl: string, mode: DataMode) {
     if ('MOCK' === mode) {
       return new DataAPI().fetchMockData(dataUrl);
@@ -55,7 +72,12 @@ export class App {
       return [];
     }
   }
-
+  /**
+   * Write data report to a csv file
+   * @param amount
+   * @param source
+   * @param bestExchangeRate
+   */
   private async writeReportToCSVFile(
     amount: number,
     source: string,
@@ -68,7 +90,7 @@ export class App {
         'Currency Code': r.to.code,
         Country: r.to.displayName,
         'Amount of currency': (r.bestExchangeRate * amount).toFixed(2),
-        'Path for the best conversion rate': r.convertionPath.join(' | '),
+        'Path for the best conversion rate': r.conversionPath.join(' | '),
       })
     );
 

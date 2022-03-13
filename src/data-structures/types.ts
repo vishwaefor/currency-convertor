@@ -4,8 +4,8 @@ export type NodeValuePair<N> = {
 };
 
 export type Weight = {
-  parent?: string;
-  value: number;
+  parent?: string; // for tracing the path
+  value: number; // value
 };
 export type AdgacencyList<N> = { [key: string]: NodeValuePair<N>[] };
 

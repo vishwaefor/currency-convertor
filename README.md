@@ -19,6 +19,7 @@ This programme could find the best currency conversion possible for the customer
 - `yarn install` : installing dependencies
 - `yarn start` : runnig application taking data from the API
 - `yarn test` : runnig application taking data from the mock-data`
+- `yarn web` : runnig a web server and showing a table`
 
 index.ts file is the entry point.
 
@@ -51,3 +52,7 @@ Bellmanford algorithm is capeable of handling negative weights and used here for
 ## Results
 
 The results of the conversions are written in to a CSV file and save under a given directory.
+
+## Web Page
+
+Please note the web site is just for showing the results

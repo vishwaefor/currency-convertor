@@ -1,8 +1,17 @@
-import { fstat } from 'fs';
+/**
+ * Generic CSV Writter
+ */
+import fs from 'fs';
 import ObjectsToCsv from 'objects-to-csv';
 import path from 'path';
-import fs from 'fs';
 
+/**
+ * Writes a CSV file with the given records and saves in the given directory
+ * @param records
+ * @param dirname
+ * @param filename
+ * @returns
+ */
 export const writeCSVFile = async (
   records: { [key: string]: any }[],
   dirname: string,

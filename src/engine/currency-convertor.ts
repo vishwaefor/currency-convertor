@@ -1,10 +1,12 @@
-import { BellmanFord as BellmanFord } from '../algorithms/bellmanford';
+/**
+ * Currency converter logics
+ */
+import { BellmanFord } from '../algorithms/bellmanford';
 import { CurrencyPair } from '../data-integrations/types';
 import { CodeValueCache } from '../data-structures/code-value-cache';
 import { Graph } from '../data-structures/graph';
 import { SimpleEdge } from '../data-structures/simple-edge';
 import { SimpleNode } from '../data-structures/simple-node';
-import { WeightsMap } from '../data-structures/types';
 import { ConvertedResult, CurrencyMetadata } from './types';
 
 export class CurrencyConvertor {
@@ -13,14 +15,17 @@ export class CurrencyConvertor {
   constructor(private currencyMetaData: CodeValueCache<CurrencyMetadata>) {
     this.bellmanfordAlgo = new BellmanFord<SimpleNode>();
   }
-
+  /**
+   * Finds the best exchange rates for other currencies from a given currency
+   * @param data
+   * @param fromCurrency
+   * @returns
+   */
   findBestExchangeRates(
     data: CurrencyPair[],
     fromCurrency: string
   ): ConvertedResult[] {
     console.log('\n\n....... finding the best exchange rates .......');
-
-    // Storing data in a graph datastructure
 
     // As explained in the README, the weights are converted to log values and negated
     const simpleEdgeList = data.map(
@@ -32,15 +37,15 @@ export class CurrencyConvertor {
         )
     );
 
+    // Storing data in a graph datastructure
     const graph = new Graph<SimpleNode>(simpleEdgeList);
 
     // Using the Belmonford algorithm to find the minimum weights for the single source
     const minimumWeights = this.bellmanfordAlgo.run(graph, fromCurrency);
 
     // Converting log weights back to exchange rates
-
     const convertedResults: ConvertedResult[] = Object.keys(minimumWeights).map(
-      (k) => ({
+      (key) => ({
         from: {
           code: fromCurrency,
           displayName:
@@ -48,14 +53,14 @@ export class CurrencyConvertor {
             fromCurrency,
         },
         to: {
-          code: k,
-          displayName: this.currencyMetaData.findValue(k)?.displayName || k,
+          code: key,
+          displayName: this.currencyMetaData.findValue(key)?.displayName || key,
         },
-        bestExchangeRate: Math.exp(-minimumWeights[k].value),
-        convertionPath: this.bellmanfordAlgo.tracePath(
+        bestExchangeRate: Math.exp(-minimumWeights[key].value), // Undoing the logrithamic action
+        conversionPath: this.bellmanfordAlgo.tracePath(
           minimumWeights,
           fromCurrency,
-          k
+          key
         ),
       })
     );

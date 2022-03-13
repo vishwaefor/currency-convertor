@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+    />
+    <title>Currency Converter</title>
+  </head>
+  <body class="container">
+    <h1>Currency Converter</h1>
+    <div class="row">
+      <input type="text" id="amount-input" value="100" />
+      <input type="text" id="currency-input" value="CAD" />
+      <button id="calcbutton">Calculate</button>
+    </div>
+    <div class="row">
+      <h1></h1>
+    </div>
+    <div class="row">
+      <table id="datatable"></table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script
+      type="text/javascript"
+      charset="utf8"
+      src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"
+    ></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.15/api/row().show().js"></script>
+    <script src="/static/js/master" async></script>
+  </body>
+</html>

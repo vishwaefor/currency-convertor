@@ -7,8 +7,8 @@ import { App } from '../app';
     '..',
     '..',
     'mock-data',
-    'test-currency-pairs.json'
+    'currency-pairs.json'
   );
 
-  new App(testDataPath, 'MOCK').run(100, 'USD');
+  new App(testDataPath, 'MOCK').run(100, 'CAD');
 })();
