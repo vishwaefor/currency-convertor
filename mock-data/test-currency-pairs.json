@@ -1,0 +1,44 @@
+[
+    {
+        "exchangeRate": 0.92,
+        "fromCurrencyCode": "USD",
+        "fromCurrencyName": "USD",
+        "toCurrencyCode": "EUR",
+        "toCurrencyName": "EUR"
+    },
+    {
+        "exchangeRate": 254.54,
+        "fromCurrencyCode": "USD",
+        "fromCurrencyName": "USD",
+        "toCurrencyCode": "LKR",
+        "toCurrencyName": "LKR"
+    },
+    {
+        "exchangeRate": 1.39,
+        "fromCurrencyCode": "EUR",
+        "fromCurrencyName": "EUR",
+        "toCurrencyCode": "CAD",
+        "toCurrencyName": "CAD"
+    },
+    {
+        "exchangeRate": 0.005,
+        "fromCurrencyCode": "LKR",
+        "fromCurrencyName": "LKR",
+        "toCurrencyCode": "CAD",
+        "toCurrencyName": "CAD"
+    },
+    {
+        "exchangeRate": 92.12,
+        "fromCurrencyCode": "CAD",
+        "fromCurrencyName": "CAD",
+        "toCurrencyCode": "JPY",
+        "toCurrencyName": "JPY"
+    },
+    {
+        "exchangeRate": 0.46,
+        "fromCurrencyCode": "LKR",
+        "fromCurrencyName": "LKR",
+        "toCurrencyCode": "JPY",
+        "toCurrencyName": "JPY"
+    }
+]
